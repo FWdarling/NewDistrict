@@ -46,7 +46,7 @@ public class DataController {
             }
             List<DataSurvey> dataSurveys = dataSurveyRepo.findByDataName(subtypeCn);
             if(dataSurveys.size() > 0) {
-                Long count = dataSurveys.get(0).getCurrentNumber();
+                String count = dataSurveys.get(0).getCurrentNumber();
                 datas.setCount(count);
             }
         }

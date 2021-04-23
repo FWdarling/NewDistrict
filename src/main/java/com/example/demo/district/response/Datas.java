@@ -9,17 +9,17 @@ public class Datas {
         this.indicators = new ArrayList<>();
     }
 
-    public Datas(Long count, List<String> indicators, String subtypeEn) {
+    public Datas(String count, List<String> indicators, String subtypeEn) {
         this.count = count;
         this.indicators = indicators;
         this.subtypeEn = subtypeEn;
     }
 
-    public Long getCount() {
+    public String getCount() {
         return count;
     }
 
-    public void setCount(Long count) {
+    public void setCount(String count) {
         this.count = count;
     }
 
@@ -39,7 +39,7 @@ public class Datas {
         this.subtypeEn = subtypeEn;
     }
 
-    public Long count;
+    public String count;
 
     public List<String> indicators;
 

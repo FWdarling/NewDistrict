@@ -14,7 +14,7 @@ public class DataSurvey {
     public DataSurvey() {
     }
 
-    public DataSurvey(Long id, String dataName, String dataCategory, String dataDesc, String statisFredaq, Long currentNumber, Date beginTime, Date endTime, String serverHost, String dbName, String tbName, String dataIndexName, String dataIndex, String coverRegion, Integer flag, String dbname, String tableName) {
+    public DataSurvey(Long id, String dataName, String dataCategory, String dataDesc, String statisFredaq, String currentNumber, Date beginTime, Date endTime, String serverHost, String dbName, String tbName, String dataIndexName, String dataIndex, String coverRegion, Integer flag, String dbname, String tableName) {
         this.id = id;
         this.dataName = dataName;
         this.dataCategory = dataCategory;
@@ -74,11 +74,11 @@ public class DataSurvey {
         this.statisFredaq = statisFredaq;
     }
 
-    public Long getCurrentNumber() {
+    public String getCurrentNumber() {
         return currentNumber;
     }
 
-    public void setCurrentNumber(Long currentNumber) {
+    public void setCurrentNumber(String currentNumber) {
         this.currentNumber = currentNumber;
     }
 
@@ -199,8 +199,8 @@ public class DataSurvey {
     @Column(name = "statis_fredaq", length = 64)
     private String statisFredaq;
 
-    @Column(name = "current_number", columnDefinition = "bigint(20)")
-    private Long currentNumber;
+    @Column(name = "current_number", length = 64)
+    private String currentNumber;
 
     @Column(name = "begin_time", columnDefinition = "datetime")
     private Date beginTime;
