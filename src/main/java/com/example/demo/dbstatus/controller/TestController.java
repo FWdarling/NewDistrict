@@ -26,15 +26,15 @@ public class TestController {
         return new ResponseEntity<String>("test succeed!", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/data_dic")
-    public ResponseEntity testOrmDic(){
-        List<DataDictionary> dictionaries = dataDictionaryRepo.findAll();
-        return new ResponseEntity<>(dictionaries, HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/data_survey")
-    public ResponseEntity testOrmSurvey(){
-        List<DataSurvey> dataSurveys = dataSurveyRepo.findAll();
-        return new ResponseEntity<>(dataSurveys, HttpStatus.OK);
-    }
+//    @RequestMapping(value = "/data_dic")
+//    public ResponseEntity testOrmDic(){
+//        List<DataDictionary> dictionaries = dataDictionaryRepo.findAll();
+//        return new ResponseEntity<>(dictionaries, HttpStatus.OK);
+//    }
+//
+//    @RequestMapping(value = "/data_survey")
+//    public ResponseEntity testOrmSurvey(){
+//        List<DataSurvey> dataSurveys = dataSurveyRepo.findAll();
+//        return new ResponseEntity<>(dataSurveys, HttpStatus.OK);
+//    }
 }

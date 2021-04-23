@@ -2,10 +2,7 @@ package com.example.demo.dbstatus.entity;
 
 import com.example.demo.dbstatus.request.RequestUser;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * description: User
@@ -13,6 +10,7 @@ import javax.persistence.Id;
  * author: fourwood
  */
 @Entity
+@Table(name = "user")
 public class User {
     public User(String userName, String password) {
         this.userName = userName;
@@ -47,7 +45,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "user_name")
     private String userName;
+    @Column(name = "password")
     private String password;
 
     public boolean checkUser(String userName, String passwd) {
