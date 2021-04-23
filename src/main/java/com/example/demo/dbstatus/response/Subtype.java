@@ -1,4 +1,4 @@
-package com.example.demo.district.response;
+package com.example.demo.dbstatus.response;
 
 import java.util.Objects;
 

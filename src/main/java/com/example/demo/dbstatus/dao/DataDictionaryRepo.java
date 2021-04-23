@@ -1,6 +1,6 @@
-package com.example.demo.district.dao;
+package com.example.demo.dbstatus.dao;
 
-import com.example.demo.district.entity.DataDictionary;
+import com.example.demo.dbstatus.entity.DataDictionary;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

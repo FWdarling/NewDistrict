@@ -1,9 +1,9 @@
-package com.example.demo.district.controller;
+package com.example.demo.dbstatus.controller;
 
-import com.example.demo.district.dao.DataDictionaryRepo;
-import com.example.demo.district.dao.DataSurveyRepo;
-import com.example.demo.district.entity.DataDictionary;
-import com.example.demo.district.entity.DataSurvey;
+import com.example.demo.dbstatus.dao.DataDictionaryRepo;
+import com.example.demo.dbstatus.dao.DataSurveyRepo;
+import com.example.demo.dbstatus.entity.DataDictionary;
+import com.example.demo.dbstatus.entity.DataSurvey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,10 +1,10 @@
-package com.example.demo.district.controller;
+package com.example.demo.dbstatus.controller;
 
-import com.example.demo.district.dao.DataDictionaryRepo;
-import com.example.demo.district.dao.DataSurveyRepo;
-import com.example.demo.district.entity.DataDictionary;
-import com.example.demo.district.entity.DataSurvey;
-import com.example.demo.district.response.Datas;
+import com.example.demo.dbstatus.dao.DataDictionaryRepo;
+import com.example.demo.dbstatus.dao.DataSurveyRepo;
+import com.example.demo.dbstatus.entity.DataDictionary;
+import com.example.demo.dbstatus.entity.DataSurvey;
+import com.example.demo.dbstatus.response.Datas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +19,14 @@ import java.util.*;
 public class DataController {
 
     @Autowired
-    private DataSurveyRepo dataSurveyRepo;
+    public DataController(DataSurveyRepo dataSurveyRepo, DataDictionaryRepo dataDictionaryRepo){
+        this.dataDictionaryRepo = dataDictionaryRepo;
+        this.dataSurveyRepo = dataSurveyRepo;
+    }
 
-    @Autowired
-    private DataDictionaryRepo dataDictionaryRepo;
+    private final DataSurveyRepo dataSurveyRepo;
+
+    private final DataDictionaryRepo dataDictionaryRepo;
 
     @RequestMapping(value = "/data_tree", method = RequestMethod.GET)
     public ResponseEntity getDataTree(){

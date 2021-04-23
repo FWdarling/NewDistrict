@@ -1,4 +1,4 @@
-package com.example.demo.district.entity;
+package com.example.demo.dbstatus.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
