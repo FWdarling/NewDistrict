@@ -26,9 +26,9 @@ public class ResponseStation {
     }
 
     public ResponseStation(SurfChnMulStation station){
-        this.stationId = station.getObservatoryId();
+        this.stationId = station.getStationId();
         this.province = station.getProvince();
-        this.stationName = station.getObservatoryName();
+        this.stationName = station.getStationName();
     }
 
     public String stationId;

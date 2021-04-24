@@ -38,7 +38,10 @@ public class ClimateIndicatorController {
             PressureRepo pressureRepo,
             SunshineRepo sunshineRepo,
             TemperatureRepo temperatureRepo,
-            WindRepo windRepo) {
+            WindRepo windRepo,
+            SurfChnMulMdayRepo surfChnMulMdayRepo,
+            SurfChnMulStationRepo surfChnMulStationRepo,
+            SurfChnMulMdayDicRepo surfChnMulMdayDicRepo) {
         this.groundTemperatureRepo = groundTemperatureRepo;
         this.dataDicRepo = dataDicRepo;
         this.obsPositionRepo = obsPositionRepo;
@@ -49,6 +52,9 @@ public class ClimateIndicatorController {
         this.sunshineRepo = sunshineRepo;
         this.temperatureRepo = temperatureRepo;
         this.windRepo = windRepo;
+        this.surfChnMulMdayRepo = surfChnMulMdayRepo;
+        this.surfChnMulMdayDicRepo = surfChnMulMdayDicRepo;
+        this.surfChnMulStationRepo = surfChnMulStationRepo;
     }
 
     private final DataDicRepo dataDicRepo;
@@ -61,6 +67,9 @@ public class ClimateIndicatorController {
     private final SunshineRepo sunshineRepo;
     private final TemperatureRepo temperatureRepo;
     private final WindRepo windRepo;
+    private final SurfChnMulMdayRepo surfChnMulMdayRepo;
+    private final SurfChnMulStationRepo surfChnMulStationRepo;
+    private final SurfChnMulMdayDicRepo surfChnMulMdayDicRepo;
 
     private static final String DEFAULT_PAGE_SIZE = "500";
     private static final Map<String, String> CLASS_NAME = new HashMap<>();
@@ -74,6 +83,7 @@ public class ClimateIndicatorController {
         CLASS_NAME.put("sunshine", "com.example.demo.climate.entity.Sunshine");
         CLASS_NAME.put("temperature", "com.example.demo.climate.entity.Temperature");
         CLASS_NAME.put("wind", "com.example.demo.climate.entity.Wind");
+        CLASS_NAME.put("SURF_CHN_MUL_MDAY", "com.example.demo.climate.entity.SurfChnMulMday");
     }
 
     @RequestMapping(value = "/0cm_ground_temperature", method = RequestMethod.GET)
@@ -412,4 +422,39 @@ public class ClimateIndicatorController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/SURF_CHN_MUL_MDAY", method = RequestMethod.GET)
+    public ResponseEntity getSurf(@RequestParam(name = "area")String stationName,
+                                  @RequestParam(name = "page_index", defaultValue = "0")int pageIndex, @RequestParam(name = "page_size", defaultValue = DEFAULT_PAGE_SIZE)int pageSize){
+        SurfChnMulStation station = surfChnMulStationRepo.findByStationName(stationName);
+        if(station == null) return new ResponseEntity<>("observatory not found!", HttpStatus.NOT_FOUND);
+
+        List<SurfChnMulMday> datas = surfChnMulMdayRepo.findByStationId(station.getStationId());
+
+        int total = datas.size();
+        if(pageIndex * pageSize > total) return new ResponseEntity<>("page overflow!", HttpStatus.BAD_REQUEST);
+        datas = datas.subList(pageIndex * pageSize, Math.min(total, (pageIndex + 1) * pageSize));
+
+        ResponseClimate response = new ResponseClimate(new ResponseStation(station));
+        response.total = total;
+        response.count = datas.size();
+        response.pageSize = pageSize;
+        response.pageNum = pageIndex;
+
+        List<SurfChnMulMdayDic> types = surfChnMulMdayDicRepo.findAll();
+        for (SurfChnMulMdayDic type : types){
+            String indicatorCode = type.getIndicatorCode();
+            ResponseSeries series = new ResponseSeries(new ResponseIndicator(type));
+            try{
+                Class<?> clazz = Class.forName(CLASS_NAME.get("SURF_CHN_MUL_MDAY"));
+                Method method = clazz.getMethod(MethodFormatUtil.surfMethod(indicatorCode));
+                for(SurfChnMulMday data : datas){
+                    series.datas.add(new ResponseData(data.getVTimeAvaila() + "_" + data.getV04292(), method.invoke(data).toString()));
+                }
+                response.series.add(series);
+            }catch (Exception e){
+                e.getStackTrace();
+            }
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

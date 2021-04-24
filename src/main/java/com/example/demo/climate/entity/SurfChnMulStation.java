@@ -16,19 +16,14 @@ public class SurfChnMulStation {
     public SurfChnMulStation() {
     }
 
-    public SurfChnMulStation(Long id, String observatoryId, String province, String observatoryName, String longitude, String latitude, String observatoryHeight, String sensorHeight, String startYear, String endYear, String missingMeasurementInterval, String statisticInterval) {
+
+    public SurfChnMulStation(Long id, String stationId, String province, String stationName, String longitude, String latitude) {
         this.id = id;
-        this.observatoryId = observatoryId;
+        this.stationId = stationId;
         this.province = province;
-        this.observatoryName = observatoryName;
+        this.stationName = stationName;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.observatoryHeight = observatoryHeight;
-        this.sensorHeight = sensorHeight;
-        this.startYear = startYear;
-        this.endYear = endYear;
-        MissingMeasurementInterval = missingMeasurementInterval;
-        this.statisticInterval = statisticInterval;
     }
 
     public Long getId() {
@@ -39,12 +34,12 @@ public class SurfChnMulStation {
         this.id = id;
     }
 
-    public String getObservatoryId() {
-        return observatoryId;
+    public String getStationId() {
+        return stationId;
     }
 
-    public void setObservatoryId(String observatoryId) {
-        this.observatoryId = observatoryId;
+    public void setStationId(String stationId) {
+        this.stationId = stationId;
     }
 
     public String getProvince() {
@@ -55,12 +50,12 @@ public class SurfChnMulStation {
         this.province = province;
     }
 
-    public String getObservatoryName() {
-        return observatoryName;
+    public String getStationName() {
+        return stationName;
     }
 
-    public void setObservatoryName(String observatoryName) {
-        this.observatoryName = observatoryName;
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
     }
 
     public String getLongitude() {
@@ -79,77 +74,17 @@ public class SurfChnMulStation {
         this.latitude = latitude;
     }
 
-    public String getObservatoryHeight() {
-        return observatoryHeight;
-    }
-
-    public void setObservatoryHeight(String observatoryHeight) {
-        this.observatoryHeight = observatoryHeight;
-    }
-
-    public String getSensorHeight() {
-        return sensorHeight;
-    }
-
-    public void setSensorHeight(String sensorHeight) {
-        this.sensorHeight = sensorHeight;
-    }
-
-    public String getStartYear() {
-        return startYear;
-    }
-
-    public void setStartYear(String startYear) {
-        this.startYear = startYear;
-    }
-
-    public String getEndYear() {
-        return endYear;
-    }
-
-    public void setEndYear(String endYear) {
-        this.endYear = endYear;
-    }
-
-    public String getMissingMeasurementInterval() {
-        return MissingMeasurementInterval;
-    }
-
-    public void setMissingMeasurementInterval(String missingMeasurementInterval) {
-        MissingMeasurementInterval = missingMeasurementInterval;
-    }
-
-    public String getStatisticInterval() {
-        return statisticInterval;
-    }
-
-    public void setStatisticInterval(String statisticInterval) {
-        this.statisticInterval = statisticInterval;
-    }
-
     @Id
     @Column(name = "id")
     private Long id;
-    @Column(name = "observatory_id")
-    private String observatoryId;
+    @Column(name = "station_id")
+    private String stationId;
     @Column(name = "province")
     private String province;
-    @Column(name = "observatory_name")
-    private String observatoryName;
+    @Column(name = "station_name")
+    private String stationName;
     @Column(name = "longitude")
     private String longitude;
     @Column(name = "latitude")
     private String latitude;
-    @Column(name = "observatory_height")
-    private String observatoryHeight;
-    @Column(name = "sensor_height")
-    private String sensorHeight;
-    @Column(name = "start_year")
-    private String startYear;
-    @Column(name = "end_year")
-    private String endYear;
-    @Column(name = "Missing_measurement_interval")
-    private String MissingMeasurementInterval;
-    @Column(name = "statistic_interval")
-    private String statisticInterval;
 }

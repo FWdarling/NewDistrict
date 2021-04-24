@@ -32,4 +32,17 @@ public class MethodFormatUtil {
         }
         return sb.append(numSb).toString();
     }
+
+    public static String surfMethod(String s) {
+        if (s == null) {
+            return null;
+        }
+        if(s.charAt(1) == '_') return "get" + toCamelCase(s);
+        s = s.toLowerCase();
+        StringBuilder sb = new StringBuilder(s);
+        if(sb.charAt(0) == 'v') {
+            sb.setCharAt(0, 'V');
+        }
+        return "get" + sb;
+    }
 }

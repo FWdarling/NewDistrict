@@ -46,11 +46,11 @@ public class SurfChnMulMday {
         this.stationId = stationId;
     }
 
-    public String getvTimeAvaila() {
+    public String getVTimeAvaila() {
         return vTimeAvaila;
     }
 
-    public void setvTimeAvaila(String vTimeAvaila) {
+    public void setVTimeAvaila(String vTimeAvaila) {
         this.vTimeAvaila = vTimeAvaila;
     }
 
