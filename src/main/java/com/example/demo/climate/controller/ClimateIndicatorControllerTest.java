@@ -45,6 +45,11 @@ public class ClimateIndicatorController {
     private final ObsPositionRepo obsPositionRepo;
 
     private static final String DEFAULT_PAGE_SIZE = "500";
+    private static final Map<String, String> CLASS_NAME = new HashMap<>();
+
+    static{
+        CLASS_NAME.put("0cm_ground_temperature", "com.example.demo.climate.entity.GroundTemperature");
+    }
 
     @RequestMapping(value = "/0cm_ground_temperature", method = RequestMethod.GET)
     public ResponseEntity getGroundTemperature(@RequestParam(name = "area")String stationName,
@@ -74,17 +79,18 @@ public class ClimateIndicatorController {
         for (DataDic type : types){
             String indicatorNameEn = type.getIndicatorNameEn();
             ResponseSeries series = new ResponseSeries(new ResponseIndicator(type));
+            try{
+                Class clazz = Class.forName(CLASS_NAME.get("GroundTemperature"));
+                Method method = clazz.getMethod()
+            }catch (Exception e){
+                e.getStackTrace();
+            }
 
             for(GroundTemperature data : datas){
-                if(indicatorNameEn.equals("avg_ground_temperature"))
-                    series.datas.add(new ResponseData(data.getcdate(), data.getAvgGroundTemperature()));
-                else if(indicatorNameEn.equals("max_ground_temperature"))
-                    series.datas.add(new ResponseData(data.getcdate(), data.getMaxGroundTemperature()));
-                else if(indicatorNameEn.equals("min_ground_temperature"))
-                    series.datas.add(new ResponseData(data.getcdate(), data.getMinGroundTemperature()));
+                series.datas.add(new ResponseData(data.getcdate(), data.get))
             }
             response.series.add(series);
         }
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 }
