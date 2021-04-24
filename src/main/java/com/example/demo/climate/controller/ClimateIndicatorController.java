@@ -7,6 +7,7 @@ import com.example.demo.climate.entity.Chn2160ObsPosition;
 import com.example.demo.climate.entity.DataDic;
 import com.example.demo.climate.entity.GroundTemperature;
 import com.example.demo.climate.response.*;
+import com.example.demo.utils.MethodFormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.xml.crypto.Data;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +45,11 @@ public class ClimateIndicatorController {
     private final ObsPositionRepo obsPositionRepo;
 
     private static final String DEFAULT_PAGE_SIZE = "500";
+    private static final Map<String, String> CLASS_NAME = new HashMap<>();
+
+    static{
+        CLASS_NAME.put("0cm_ground_temperature", "com.example.demo.climate.entity.GroundTemperature");
+    }
 
     @RequestMapping(value = "/0cm_ground_temperature", method = RequestMethod.GET)
     public ResponseEntity getGroundTemperature(@RequestParam(name = "area")String stationName,
@@ -74,16 +79,16 @@ public class ClimateIndicatorController {
         for (DataDic type : types){
             String indicatorNameEn = type.getIndicatorNameEn();
             ResponseSeries series = new ResponseSeries(new ResponseIndicator(type));
-
-            for(GroundTemperature data : datas){
-                if(indicatorNameEn.equals("avg_ground_temperature"))
-                    series.datas.add(new ResponseData(data.getcdate(), data.getAvgGroundTemperature()));
-                else if(indicatorNameEn.equals("max_ground_temperature"))
-                    series.datas.add(new ResponseData(data.getcdate(), data.getMaxGroundTemperature()));
-                else if(indicatorNameEn.equals("min_ground_temperature"))
-                    series.datas.add(new ResponseData(data.getcdate(), data.getMinGroundTemperature()));
+            try{
+                Class<?> clazz = Class.forName(CLASS_NAME.get("0cm_ground_temperature"));
+                Method method = clazz.getMethod("get" + MethodFormatUtil.toCamelCase(indicatorNameEn));
+                for(GroundTemperature data : datas){
+                    series.datas.add(new ResponseData(data.getcdate(), method.invoke(data).toString()));
+                }
+                response.series.add(series);
+            }catch (Exception e){
+                e.getStackTrace();
             }
-            response.series.add(series);
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
