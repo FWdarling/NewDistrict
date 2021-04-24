@@ -11,9 +11,8 @@ import javax.persistence.Id;
  */
 @Entity
 public class Test {
-    public Test(Long id, String content) {
+    public Test(Long id) {
         this.id = id;
-        this.content = content;
     }
 
     public Test() {
@@ -27,18 +26,9 @@ public class Test {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 
     @Id
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "content")
-    private String content;
 }
