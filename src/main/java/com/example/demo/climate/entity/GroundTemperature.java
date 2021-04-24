@@ -155,11 +155,11 @@ public class GroundTemperature {
         this.timestamp = timestamp;
     }
 
-    public String getcdate() {
+    public String getCdate() {
         return cdate;
     }
 
-    public void setcdate(String cdate) {
+    public void setCdate(String cdate) {
         this.cdate = cdate;
     }
     @Id
