@@ -122,7 +122,7 @@ public class ClimateIndicatorController {
                 }
                 response.series.add(series);
             }catch (Exception e){
-                e.getStackTrace();
+                e.printStackTrace();
             }
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -164,7 +164,7 @@ public class ClimateIndicatorController {
                 }
                 response.series.add(series);
             }catch (Exception e){
-                e.getStackTrace();
+                e.printStackTrace();
             }
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -206,7 +206,7 @@ public class ClimateIndicatorController {
                 }
                 response.series.add(series);
             }catch (Exception e){
-                e.getStackTrace();
+                e.printStackTrace();
             }
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -248,7 +248,7 @@ public class ClimateIndicatorController {
                 }
                 response.series.add(series);
             }catch (Exception e){
-                e.getStackTrace();
+                e.printStackTrace();
             }
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -290,7 +290,7 @@ public class ClimateIndicatorController {
                 }
                 response.series.add(series);
             }catch (Exception e){
-                e.getStackTrace();
+                e.printStackTrace();
             }
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -332,7 +332,7 @@ public class ClimateIndicatorController {
                 }
                 response.series.add(series);
             }catch (Exception e){
-                e.getStackTrace();
+                e.printStackTrace();
             }
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -374,7 +374,7 @@ public class ClimateIndicatorController {
                 }
                 response.series.add(series);
             }catch (Exception e){
-                e.getStackTrace();
+                e.printStackTrace();
             }
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -416,7 +416,7 @@ public class ClimateIndicatorController {
                 }
                 response.series.add(series);
             }catch (Exception e){
-                e.getStackTrace();
+                e.printStackTrace();
             }
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -452,7 +452,7 @@ public class ClimateIndicatorController {
                 }
                 response.series.add(series);
             }catch (Exception e){
-                e.getStackTrace();
+                e.printStackTrace();
             }
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
