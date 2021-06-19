@@ -54,6 +54,34 @@ public class DataController {
                 datas.setCount(count);
             }
         }
-        return new ResponseEntity<>(ret, HttpStatus.OK);
+
+        List<Map<String, Object>> result = new ArrayList<>();
+        for(Map.Entry<String, Map<String, Datas>> e : ret.entrySet()) {
+            Map<String, Object> typeMap = new HashMap<>();
+            String typeCn = e.getKey();
+            typeMap.put("name", typeCn);
+            Map<String, Datas> subtype = e.getValue();
+            List<Map<String, Object>> typeChildren = new ArrayList<>();
+            for (Map.Entry<String, Datas> subE : subtype.entrySet()) {
+                Map<String, Object> subtypeMap = new HashMap<>();
+                String subtypeCn = subE.getKey();
+                subtypeMap.put("name", subtypeCn);
+                Datas datas = subE.getValue();
+                List<Map<String, String>> subtypeChildren = new ArrayList<>();
+                subtypeMap.put("count", datas.getCount());
+                subtypeMap.put("subtypeEn", datas.getSubtypeEn());
+                List<String> indicators = datas.getIndicators();
+                for(String indicator : indicators) {
+                    Map<String, String> indicatorMap = new HashMap<>();
+                    indicatorMap.put("name", indicator);
+                    subtypeChildren.add(indicatorMap);
+                }
+                subtypeMap.put("children", subtypeChildren);
+                typeChildren.add(subtypeMap);
+            }
+            typeMap.put("children", typeChildren);
+            result.add(typeMap);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
